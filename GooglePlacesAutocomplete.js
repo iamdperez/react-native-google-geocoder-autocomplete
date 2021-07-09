@@ -81,6 +81,7 @@ export default class GooglePlacesAutocomplete extends Component {
   constructor(props) {
     super(props);
     this.state = this.getInitialState.call(this);
+    this.startComponent();
   }
 
   getInitialState = () => ({
@@ -115,7 +116,7 @@ export default class GooglePlacesAutocomplete extends Component {
     return [...res, ...results];
   }
 
-  componentWillMount() {
+  startComponent() {
     this._request = this.props.debounce
       ? debounce(this._request, this.props.debounce)
       : this._request;
@@ -128,7 +129,7 @@ export default class GooglePlacesAutocomplete extends Component {
     this._isMounted = true;
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.listViewDisplayed !== 'auto') {
       this.setState({
         listViewDisplayed: nextProps.listViewDisplayed,
